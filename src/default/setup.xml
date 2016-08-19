@@ -1,0 +1,15 @@
+<setup>
+  
+  <block title="Global Settings for the Alert Action" endpoint="admin/alert_actions" entity="make_a_log_message">
+	  
+      <text>An example of a setup page for the make-a-log-message example modular alert action
+      </text>
+
+      <input field="param.message">
+        <label>Enter a default message</label>
+        <type>text</type>
+      </input>
+      
+  </block>
+
+</setup>
