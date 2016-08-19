@@ -1,0 +1,23 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="make_a_log_message_message">Message</label>
+
+        <div class="controls">
+            <input type="text" name="action.make_a_log_message.param.message" id="make_a_log_message_message" placeholder="e.g. hello world!!!" />
+            <span class="help-block">The message to write into a log</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="make_a_log_message_importance">Importance</label>
+
+        <div class="controls">
+            <select name="action.make_a_log_message.param.importance" id="make_a_log_message_importance" >
+			  <option value="0">Low</option>
+			  <option value="1">Medium</option>
+			  <option value="2">High</option>
+			  <option value="3">Critical</option>
+			</select>
+            <span class="help-block">The importance of the message</span>
+        </div>
+    </div>
+</form>
