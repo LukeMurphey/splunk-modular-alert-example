@@ -30,3 +30,24 @@ class MakeLogMessageAlert(ModularAlert):
         self.logger.info("Ok, here we go...")
         self.make_the_log_message(message, importance)
         self.logger.info("Successfully executed the modular alert. You are a total pro.")
+        
+        
+"""
+If the script is being called directly from the command-line, then this is likely being executed by Splunk.
+"""
+if __name__ == '__main__':
+    
+    # Make sure this is a call to execute
+    if len(sys.argv) > 1 and sys.argv[1] == "--execute":
+        
+        try:
+            modular_alert = MakeLogMessageAlert()
+            modular_alert.execute()
+            sys.exit(0)
+        except Exception as e:
+            print >> sys.stderr, "Unhandled exception was caught, this may be due to a defect in the script:" + str(e) # This logs general exceptions that would have been unhandled otherwise (such as coding errors)
+            raise
+        
+    else:
+        print >> sys.stderr, "Unsupported execution mode (expected --execute flag)"
+        sys.exit(1)
