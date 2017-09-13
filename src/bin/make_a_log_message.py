@@ -23,10 +23,14 @@ class MakeLogMessageAlert(ModularAlert):
 
     def run(self, cleaned_params, payload):
         
+        # Get the "source" field of the search result from the payload
+        # This shows how one can get data from the search results
+        source_field = payload['result'].get('source', 'source was undefined')
+        self.logger.info("The source was: " + source_field)
+
         # Get the information we need to execute the alert action
         importance = cleaned_params.get('importance', 0)
         message = cleaned_params.get('message', "(blank)")
-        
         self.logger.info("Ok, here we go...")
         self.make_the_log_message(message, importance)
         self.logger.info("Successfully executed the modular alert. You are a total pro.")
