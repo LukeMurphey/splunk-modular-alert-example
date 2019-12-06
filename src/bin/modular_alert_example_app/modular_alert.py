@@ -7,6 +7,16 @@ import os
 import json
 import socket # Used for IP Address validation
 
+try:
+    from urlparse import urlparse
+except:
+    from urllib.parse import urlparse
+
+try:
+    basestring
+except:
+    basestring = str
+
 from splunk.appserver.mrsparkle.lib.util import make_splunkhome_path
 
 class FieldValidationException(Exception):
@@ -441,7 +451,7 @@ class ModularAlert(object):
         host -- The host
         """
         
-        output = self.create_event_string(data_dict, stanza, sourcetype, source, index, host, unbroken, close)
+        output = self.create_event_string(data_dict)
         
         out.write(output)
         out.flush()
@@ -489,17 +499,6 @@ class ModularAlert(object):
                 raise FieldValidationException("The argument '%s' is not valid" % (name))
             
         return cleaned_params
-    
-    def read_config(self, in_stream=sys.stdin):
-        """
-        Read the config from standard input and return the configuration.
-        
-        in_stream -- The stream to get the input from (defaults to standard input)
-        """
-        
-        config_str_xml = in_stream.read()
-        
-        return ModularInputConfig.get_config_from_xml(config_str_xml)
     
     def run(self, cleaned_params, payload):
         """
